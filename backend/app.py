@@ -157,6 +157,34 @@ async def list_farm_dataset():
     return {"total_photos": len(files), "photos": files}
 
 
+from backend.whatsapp_direct import process_incoming_whatsapp_photo, generate_twiml_response
+
+@app.post("/api/whatsapp/twilio")
+async def twilio_whatsapp_webhook(
+    Body: str = Form(""),
+    From: str = Form(""),
+    MediaUrl0: str = Form(""),
+    NumMedia: int = Form(0)
+):
+    """
+    Direct Twilio / Meta WhatsApp Webhook Endpoint.
+    1. Receives real leaf photo sent by farmer over WhatsApp.
+    2. Runs AI crop disease diagnosis & live weather risk calculation.
+    3. Translates report to Telugu / Hindi / English.
+    4. Returns TwiML response message back to farmer's WhatsApp chat.
+    """
+    if NumMedia > 0 and MediaUrl0:
+        reply_text = process_incoming_whatsapp_photo(MediaUrl0, From, Body, lang="te")
+    else:
+        reply_text = (
+            "🌾 *FARMERS SOLUTION WhatsApp Advisory* 🌾\n\n"
+            "నమస్కారం! Please send a photo of your crop leaf to get instant AI disease diagnosis, remedies, and weather advice."
+        )
+
+    twiml_xml = generate_twiml_response(reply_text)
+    return Response(content=twiml_xml, media_type="application/xml")
+
+
 @app.post("/api/whatsapp/webhook")
 async def whatsapp_bot_webhook(request: Request):
     """
