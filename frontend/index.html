@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KrishiRakshak AI - Smart Crop Disease & Weather Advisory System</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="theme-dark">
+
+  <!-- Top Announcement Bar -->
+  <div class="top-banner">
+    <span>🌾 <strong>KrishiRakshak AI</strong>: Regional Crop Disease Detection, Live Open-Meteo Weather Advisory & Native Voice Assistant</span>
+    <span class="github-badge"><i class="fab fa-github"></i> github.com/srinivasgangumalla12/crop-disease-detection</span>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+        <div class="logo-text">
+          <h1>KrishiRakshak <span>AI</span></h1>
+          <p id="lbl-tagline">Smart Agriculture Advisory & Leaf Diagnostics</p>
+        </div>
+      </div>
+
+      <!-- Controls: Region, Language & Audio -->
+      <div class="header-controls">
+        <!-- Region Dropdown -->
+        <div class="control-group">
+          <label for="select-region"><i class="fa-solid fa-location-dot"></i> Farm Region:</label>
+          <select id="select-region" class="custom-select">
+            <option value="Guntur" selected>Guntur (Andhra Pradesh)</option>
+            <option value="Vijayawada">Vijayawada (Andhra Pradesh)</option>
+            <option value="Warangal">Warangal (Telangana)</option>
+            <option value="Hyderabad">Hyderabad (Telangana)</option>
+            <option value="Ludhiana">Ludhiana (Punjab)</option>
+            <option value="Pune">Pune (Maharashtra)</option>
+            <option value="Bengaluru">Bengaluru (Karnataka)</option>
+            <option value="Delhi">Delhi NCR</option>
+          </select>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="control-group">
+          <label for="select-lang"><i class="fa-solid fa-language"></i> Language:</label>
+          <select id="select-lang" class="custom-select highlight-lang">
+            <option value="te" selected>తెలుగు (Telugu)</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            <option value="en">English</option>
+            <option value="ta">தமிழ் (Tamil)</option>
+            <option value="kn">ಕನ್ನಡ (Kannada)</option>
+            <option value="mr">मराठी (Marathi)</option>
+            <option value="bn">বাংলা (Bengali)</option>
+          </select>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="btn-theme-toggle" class="btn-icon" title="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs-bar">
+    <div class="nav-tabs-container">
+      <button class="nav-tab active" data-tab="tab-scanner"><i class="fa-solid fa-camera"></i> <span id="nav-lbl-scan">Leaf Disease Scanner</span></button>
+      <button class="nav-tab" data-tab="tab-weather"><i class="fa-solid fa-cloud-sun-rain"></i> <span id="nav-lbl-weather">Live Weather Radar</span></button>
+      <button class="nav-tab" data-tab="tab-whatsapp"><i class="fa-brands fa-whatsapp"></i> <span id="nav-lbl-wa">WhatsApp Bot Simulator</span></button>
+      <button class="nav-tab" data-tab="tab-dataset"><i class="fa-solid fa-cloud-arrow-up"></i> <span id="nav-lbl-data">Local Farm Dataset</span></button>
+    </div>
+  </nav>
+
+  <!-- Main Workspace -->
+  <main class="main-content">
+
+    <!-- TAB 1: LEAF DISEASE SCANNER -->
+    <section id="tab-scanner" class="tab-pane active">
+      <div class="grid-2-col">
+
+        <!-- Left Column: Upload / Image Input -->
+        <div class="card glass-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-cloud-arrow-up"></i> Upload Crop Leaf Photo</h3>
+            <span class="badge badge-green">AI CV Model Ready</span>
+          </div>
+          
+          <!-- Drag & Drop Zone -->
+          <div id="drop-zone" class="drop-zone">
+            <input type="file" id="file-input" accept="image/*" class="file-input-hidden">
+            <div class="drop-zone-content">
+              <div class="upload-icon-wrapper">
+                <i class="fa-solid fa-file-image"></i>
+              </div>
+              <p class="drop-title">Drag & Drop Leaf Photo here</p>
+              <p class="drop-sub">or click to browse from device / camera</p>
+              <button class="btn btn-primary" onclick="document.getElementById('file-input').click()"><i class="fa-solid fa-folder-open"></i> Select Photo</button>
+            </div>
+            <!-- Image Preview -->
+            <div id="preview-wrapper" class="preview-wrapper hidden">
+              <img id="image-preview" src="" alt="Crop Leaf Preview">
+              <button id="btn-remove-image" class="btn-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+          </div>
+
+          <!-- Quick Test Samples -->
+          <div class="quick-samples-section">
+            <p class="samples-title"><i class="fa-solid fa-flask"></i> Quick Test Sample Photos (1-Click Test):</p>
+            <div class="samples-grid">
+              <button class="sample-btn" data-sample="tomato_late_blight.jpg">🍅 Tomato Late Blight</button>
+              <button class="sample-btn" data-sample="tomato_early_blight.jpg">🍅 Tomato Early Blight</button>
+              <button class="sample-btn" data-sample="tomato_yellow_leaf_curl.jpg">🟡 Tomato Yellow Curl</button>
+              <button class="sample-btn" data-sample="rice_blast.jpg">🌾 Rice Blast</button>
+              <button class="sample-btn" data-sample="tomato_healthy.jpg">✅ Healthy Tomato</button>
+            </div>
+          </div>
+
+          <!-- Analyze Action Button -->
+          <div class="action-bar">
+            <button id="btn-analyze" class="btn btn-action btn-large" disabled>
+              <i class="fa-solid fa-microscope"></i> <span id="lbl-btn-analyze">Diagnose Disease & Generate Advisory</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: AI Diagnostic Report & Audio Voice Player -->
+        <div class="card glass-card">
+          <div class="card-header">
+            <h3><i class="fa-solid fa-stethoscope"></i> AI Diagnosis & Treatment Plan</h3>
+            <button id="btn-speak-voice" class="btn btn-voice hidden"><i class="fa-solid fa-volume-high"></i> <span id="lbl-voice">Read Aloud (వినిపించు)</span></button>
+          </div>
+
+          <!-- Loading State -->
+          <div id="diagnosis-loading" class="loading-state hidden">
+            <div class="spinner"></div>
+            <p>Analyzing leaf color space, lesion spot textures & fetching Open-Meteo weather...</p>
+          </div>
+
+          <!-- Initial Empty State -->
+          <div id="diagnosis-empty" class="empty-state">
+            <i class="fa-solid fa-seedling empty-icon"></i>
+            <p>Upload a crop leaf photo or click a sample to see AI diagnosis, organic/chemical cures, weather advisory, and voice readout.</p>
+          </div>
+
+          <!-- Diagnostic Results View -->
+          <div id="diagnosis-result" class="result-container hidden">
+
+            <!-- Result Header Banner -->
+            <div id="result-banner" class="result-banner">
+              <div class="banner-title-area">
+                <span id="res-crop-badge" class="badge badge-crop">Tomato</span>
+                <h2 id="res-disease-name">Late Blight (Phytophthora infestans)</h2>
+                <p id="res-category" class="sub-category">Fungal / Oomycete</p>
+              </div>
+              <div class="banner-stat">
+                <div class="stat-circle">
+                  <span id="res-confidence">96.4%</span>
+                  <small>Confidence</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Severity & Area Gauges -->
+            <div class="metrics-row">
+              <div class="metric-box">
+                <span class="metric-lbl">Severity Status</span>
+                <span id="res-severity" class="metric-val val-danger">Moderate Stage</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-lbl">Affected Leaf Area</span>
+                <span id="res-affected-area" class="metric-val">32.5%</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-lbl">Fungal Weather Risk</span>
+                <span id="res-weather-risk" class="metric-val val-warning">82% High Risk</span>
+              </div>
+            </div>
+
+            <!-- Accordion / Remedy Sections -->
+            <div class="remedies-section">
+              <!-- Organic Remedies -->
+              <div class="remedy-card organic-box">
+                <h4><i class="fa-solid fa-leaf"></i> <span id="lbl-org-head">Organic & Bio Remedies</span></h4>
+                <ul id="res-organic-list" class="remedy-list"></ul>
+              </div>
+
+              <!-- Chemical Remedies -->
+              <div class="remedy-card chemical-box">
+                <h4><i class="fa-solid fa-vial"></i> <span id="lbl-chem-head">Chemical Fungicides & Pesticides</span></h4>
+                <ul id="res-chemical-list" class="remedy-list"></ul>
+              </div>
+
+              <!-- Preventive & Weather Action Plan -->
+              <div class="remedy-card weather-action-box">
+                <h4><i class="fa-solid fa-cloud-sun"></i> Weather Action Plan & Next Steps</h4>
+                <div id="res-weather-warning" class="alert-box alert-warning"></div>
+                <ul id="res-action-list" class="remedy-list"></ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 2: LIVE WEATHER RADAR -->
+    <section id="tab-weather" class="tab-pane">
+      <div class="card glass-card">
+        <div class="card-header">
+          <h3><i class="fa-solid fa-cloud-sun-rain"></i> Open-Meteo Live Farm Weather Radar</h3>
+          <button id="btn-refresh-weather" class="btn btn-secondary"><i class="fa-solid fa-rotate-right"></i> Refresh Weather</button>
+        </div>
+
+        <div class="weather-dashboard-grid">
+          <!-- Weather Stat Cards -->
+          <div class="w-card">
+            <i class="fa-solid fa-temperature-high w-icon icon-temp"></i>
+            <span class="w-val" id="w-temp">28.5 °C</span>
+            <span class="w-lbl">Current Temperature</span>
+          </div>
+          <div class="w-card">
+            <i class="fa-solid fa-droplet w-icon icon-humidity"></i>
+            <span class="w-val" id="w-humidity">78 %</span>
+            <span class="w-lbl">Relative Humidity</span>
+          </div>
+          <div class="w-card">
+            <i class="fa-solid fa-cloud-showers-heavy w-icon icon-rain"></i>
+            <span class="w-val" id="w-rain">65 %</span>
+            <span class="w-lbl">Rain Probability</span>
+          </div>
+          <div class="w-card">
+            <i class="fa-solid fa-wind w-icon icon-wind"></i>
+            <span class="w-val" id="w-wind">14.2 km/h</span>
+            <span class="w-lbl">Wind Speed</span>
+          </div>
+        </div>
+
+        <!-- Disease Spreading Risk Bar -->
+        <div class="risk-bar-container">
+          <div class="risk-bar-header">
+            <h4><i class="fa-solid fa-triangle-exclamation"></i> Micro-Climate Fungal Spreading Risk Index</h4>
+            <span id="risk-badge" class="badge badge-danger">HIGH RISK (82%)</span>
+          </div>
+          <div class="progress-track">
+            <div id="risk-progress-fill" class="progress-fill" style="width: 82%;"></div>
+          </div>
+          <p id="risk-description" class="risk-desc">High relative humidity (>75%) paired with current temperatures creates ideal spore germination conditions. Follow protective spray timing.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: WHATSAPP BOT SIMULATOR -->
+    <section id="tab-whatsapp" class="tab-pane">
+      <div class="card glass-card whatsapp-container">
+        <div class="wa-header">
+          <div class="wa-avatar"><i class="fa-brands fa-whatsapp"></i></div>
+          <div class="wa-info">
+            <h4>KrishiRakshak Farmer WhatsApp Bot</h4>
+            <p><i class="fa-solid fa-circle wa-online"></i> Online | WhatsApp Business API Enabled</p>
+          </div>
+        </div>
+
+        <div id="wa-chat-body" class="wa-chat-body">
+          <div class="wa-msg wa-received">
+            <div class="wa-bubble">
+              🌾 <strong>నమస్కారం రైతు సోదరా! (Welcome Farmer!)</strong><br>
+              Send any crop leaf photo here to get immediate AI disease detection, treatment dosage, and weather advice in Telugu/Hindi/English!
+            </div>
+            <span class="wa-time">10:00 AM</span>
+          </div>
+        </div>
+
+        <div class="wa-footer">
+          <button id="wa-btn-attach" class="btn-wa-attach" title="Attach Leaf Photo"><i class="fa-solid fa-paperclip"></i></button>
+          <input type="text" id="wa-text-input" placeholder="Type a message or select a sample leaf image to send..." class="wa-input">
+          <button id="wa-btn-send" class="btn-wa-send"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: LOCAL FARM DATASET HUB -->
+    <section id="tab-dataset" class="tab-pane">
+      <div class="card glass-card">
+        <div class="card-header">
+          <h3><i class="fa-solid fa-cloud-arrow-up"></i> Local Farm Photo Contribution Hub</h3>
+          <span class="badge badge-blue">Continuous Learning</span>
+        </div>
+        <p class="subtitle">Upload leaf photos directly collected from your local farm to continuously train and adapt models to regional field conditions.</p>
+
+        <form id="form-dataset-upload" class="dataset-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Select Local Farm Photo:</label>
+              <input type="file" id="ds-file" accept="image/*" required class="custom-file-input">
+            </div>
+            <div class="form-group">
+              <label>Crop Name:</label>
+              <input type="text" id="ds-crop" placeholder="e.g. Tomato / Paddy / Chilli" required class="custom-text-input">
+            </div>
+            <div class="form-group">
+              <label>Disease Tag (if known):</label>
+              <input type="text" id="ds-disease" placeholder="e.g. Leaf Blight / Healthy" required class="custom-text-input">
+            </div>
+            <div class="form-group">
+              <label>Farm Location:</label>
+              <input type="text" id="ds-location" placeholder="e.g. Guntur Farm 3" required class="custom-text-input">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Save Photo to Local Dataset</button>
+        </form>
+
+        <hr class="divider">
+
+        <h4>Contributed Local Farm Dataset Repository</h4>
+        <div id="dataset-gallery" class="dataset-gallery">
+          <p class="empty-text">No custom photos uploaded yet. Upload your first local farm photo above!</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <p>© 2026 <strong>KrishiRakshak AI</strong> | Developed for Farmers & Regional Crop Health | Open-Meteo & PlantVillage Taxonomies</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
