@@ -11,9 +11,8 @@ if hasattr(sys.stdout, 'reconfigure'):
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 USERNAME = "srinivasgangumalla12"
-PASS = "mesrinivas181645"
 REPO_NAME = "crop-disease-detection"
-REMOTE_URL = f"https://{USERNAME}:{PASS}@github.com/{USERNAME}/{REPO_NAME}.git"
+REMOTE_URL = f"https://github.com/{USERNAME}/{REPO_NAME}.git"
 
 def run_cmd(cmd, cwd=REPO_DIR):
     print(f"Executing: {cmd}")
@@ -31,9 +30,9 @@ def deploy():
     run_cmd(f'git config user.email "srinivasgangumalla12@gmail.com"')
     run_cmd("git branch -M main")
     run_cmd("git add .")
-    run_cmd('git commit -m "Deploy KrishiRakshak AI - Crop Disease Detection & Agricultural Weather Advisory System"')
+    run_cmd('git commit -m "Deploy FARMERS SOLUTION - Crop Disease Detection & Agricultural Weather Advisory System"')
     
-    # Configure remote
+    # Configure clean remote
     run_cmd("git remote remove origin")
     run_cmd(f"git remote add origin {REMOTE_URL}")
     
@@ -42,7 +41,7 @@ def deploy():
     if ret == 0:
         print(f"\nSUCCESS! Project successfully deployed to https://github.com/{USERNAME}/{REPO_NAME}")
     else:
-        print("\nNote: Remote repository may need to be created first on GitHub. You can create repository 'crop-disease-detection' at https://github.com/new and re-run python deploy_github.py")
+        print("\nNote: Make sure repository 'crop-disease-detection' is created on GitHub at https://github.com/new")
 
 if __name__ == "__main__":
     deploy()
