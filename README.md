@@ -1,4 +1,4 @@
-# 🌾 KrishiRakshak AI - Smart Crop Disease Detection & Agricultural Weather Advisory System
+# 🌾 FARMERS SOLUTION - Smart Crop Disease Detection & Agricultural Weather Advisory System
 
 > An end-to-end AI Computer Vision, Live Weather Advisory & Multilingual Voice Assistant System tailored for regional farmers.
 

@@ -1,4 +1,4 @@
-// Frontend Interactive Application Logic for KrishiRakshak AI
+// Frontend Interactive Application Logic for FARMERS SOLUTION
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const botMsg = document.createElement("div");
       botMsg.className = "wa-msg wa-received";
 
-      let botText = "🌾 *KrishiRakshak Bot*: Processing your query...";
+      let botText = "🌾 *FARMERS SOLUTION Bot*: Processing your query...";
       if (text.toLowerCase().includes("weather")) {
         botText = `🌤️ *Live Farm Weather Report for ${selectRegion.value}*\nTemp: ${document.getElementById("w-temp").textContent}\nHumidity: ${document.getElementById("w-humidity").textContent}\nFungal Risk: HIGH (82%). Spray before rains.`;
       } else if (text.toLowerCase().includes("telugu") || text.toLowerCase().includes("తెలుగు")) {

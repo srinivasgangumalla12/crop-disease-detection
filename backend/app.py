@@ -21,7 +21,7 @@ UPLOADS_DIR = os.path.join(BASE_DIR, "dataset_uploads")
 os.makedirs(UPLOADS_DIR, exist_ok=True)
 
 app = FastAPI(
-    title="Crop Disease Detection & Weather Advisory API",
+    title="FARMERS SOLUTION - Crop Disease Detection & Weather Advisory API",
     description="AI Computer Vision Plant Leaf Disease Diagnostics, Live Weather Analytics, and Multilingual Voice Advisory for Farmers.",
     version="2.0.0"
 )
@@ -178,7 +178,7 @@ async def whatsapp_bot_webhook(request: Request):
         "type": "text",
         "text": {
             "body": (
-                "🌾 *Smart Farmer Crop Disease & Weather Bot* 🌾\n\n"
+                "🌾 *FARMERS SOLUTION - Crop Disease & Weather Bot* 🌾\n\n"
                 "నమస్కారం! Please reply with a leaf photo of your crop to diagnose disease instantly.\n\n"
                 "Available Commands:\n"
                 "1️⃣ Upload leaf image\n"

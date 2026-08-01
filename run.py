@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 if __name__ == "__main__":
     print("\n" + "="*70)
-    print("Starting KrishiRakshak AI - Crop Disease Detection & Advisory Server")
+    print("Starting FARMERS SOLUTION - Crop Disease Detection & Advisory Server")
     print("Local Web Dashboard: http://localhost:8000")
     print("OpenAPI Documentation: http://localhost:8000/docs")
     print("="*70 + "\n")
